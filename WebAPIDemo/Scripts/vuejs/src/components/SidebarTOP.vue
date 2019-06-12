@@ -1,11 +1,13 @@
 <template>
   <v-toolbar>
     <v-toolbar-items>
-      <v-btn flat
-      v-for="item in data" :key="item.title"
-      >
-      <v-icon right dark>{{item.icon}}</v-icon>
-      {{ item.title }}
+      <v-btn flat>
+        <v-icon right dark>create</v-icon>
+        Create Employee
+      </v-btn>
+      <v-btn flat>
+        <v-icon right dark>delete</v-icon>
+        Delete Employee
       </v-btn>
     </v-toolbar-items>
   </v-toolbar>

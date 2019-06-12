@@ -1,6 +1,7 @@
 <template>
     <v-container grid-list-md>
         <v-layout row wrap>
+            <TitleLink title="Employee's list"></TitleLink>
             <!-- SidebarTop show in small screen-->
             <v-flex xs12 hidden-md-and-up>
                 <SidebarTOP></SidebarTOP>
@@ -22,19 +23,20 @@
 
             <!-- SideBar show in large screen -->
             <v-flex md4 hidden-sm-and-down>
-                <Sidebar></Sidebar>
+                <Sidebar cate='Employee'></Sidebar>
             </v-flex>
         </v-layout>
     </v-container>
 </template>
 
 <script>
+import TitleLink from '../components/TitleLink'
 import SingleEmployee from '../components/employee/SingleEmployee'
 import Sidebar from '../components/Sidebar'
 import SidebarTOP from '../components/SidebarTOP'
 
 export default {
-    components: {SingleEmployee, Sidebar, SidebarTOP},
+    components: {SingleEmployee, Sidebar, SidebarTOP, TitleLink},
     data() {
         return {
             department_id: this.$route.params.department_id,

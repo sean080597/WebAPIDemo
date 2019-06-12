@@ -11,6 +11,7 @@ const routes = [
     { path: '/employee', component: require('./pages/Employee.vue').default },
     { path: '/department/employee/:department_id', component: require('./pages/Employee.vue').default },
     { path: '/employee/create', component: require('./pages/Employee/CreateOrEdit.vue').default },
+    { path: '/department/create', component: require('./pages/Department/CreateOrEdit.vue').default },
 ];
 
 const router = new VueRouter({

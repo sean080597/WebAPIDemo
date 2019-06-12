@@ -1,6 +1,7 @@
 <template>
     <v-container grid-list-md>
         <v-layout row wrap align-center justify-center>
+            <TitleLink title="Employee/Create"></TitleLink>
             <!-- List employees -->
             <v-flex xs8 sm10 md6>
                 <v-form @submit.prevent = "createEmployee">
@@ -9,8 +10,8 @@
                         type="text"
                         v-model="form.empName"
                         v-validate="'required|max:50'"
-                        :error-messages="errors.collect('form.empName')"
-                        data-vv-name="form.empName"
+                        :error-messages="errors.collect('Employee Name')"
+                        data-vv-name="Employee Name"
                         required
                     ></v-text-field>
                     <v-text-field
@@ -18,8 +19,8 @@
                         type="number"
                         v-model="form.empAge"
                         v-validate="'required|numeric|min_value:18|max_value:50'"
-                        :error-messages="errors.collect('form.empAge')"
-                        data-vv-name="form.empAge"
+                        :error-messages="errors.collect('Employee Age')"
+                        data-vv-name="Employee Age"
                         required
                     ></v-text-field>
                     <v-text-field
@@ -27,8 +28,8 @@
                         type="number"
                         v-model="form.empSalary"
                         v-validate="'required|numeric'"
-                        :error-messages="errors.collect('form.empSalary')"
-                        data-vv-name="form.empSalary"
+                        :error-messages="errors.collect('Employee Salary')"
+                        data-vv-name="Employee Salary"
                         required
                     ></v-text-field>
                     <v-autocomplete
@@ -38,8 +39,8 @@
                         label="Department Name"
                         v-model="form.empDepartID"
                         v-validate="'required'"
-                        :error-messages="errors.collect('form.empDepartID')"
-                        data-vv-name="form.empDepartID"
+                        :error-messages="errors.collect('Department Name')"
+                        data-vv-name="Department Name"
                         required
                     ></v-autocomplete>
 
@@ -51,7 +52,10 @@
 </template>
 
 <script>
+import TitleLink from '../../components/TitleLink'
+
 export default {
+    components: {TitleLink},
     $_veeValidate: {
       validator: 'new'
     },
@@ -66,11 +70,11 @@ export default {
             departments: [],
             dictionary: {
                 custom: {
-                    empName:{
+                    'Employee Name':{
                         required: () => 'Name can not be empty',
-                        max: 'The name field may not be greater than 10 characters'
+                        max: 'The name field may not be greater than 50 characters'
                     },
-                    empDepartID: {
+                    'Department Name': {
                         required: 'Select field is required'
                     }
                 }
@@ -83,7 +87,17 @@ export default {
             .then(({data}) => this.departments = data)
         },
         createEmployee(){
-            this.$validator.validateAll()
+
+            this.$validator.validateAll().then((result) => {
+                if(result){
+                    toast.fire({
+                        type: 'info',
+                        title: 'Coming soon! =\)\)'
+                    });
+                }else{
+                    this.$Progress.fail();
+                }
+            })
         }
     },
     created() {

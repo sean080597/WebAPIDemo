@@ -12,6 +12,7 @@ using WebAPIDemo.Models;
 
 namespace WebAPIDemo.Controllers
 {
+    [RoutePrefix("api/department")]
     public class DepartmentController : ApiController
     {
         private EmployeeEntities db = new EmployeeEntities();
@@ -129,6 +130,17 @@ namespace WebAPIDemo.Controllers
         private bool DEPARTMENTExists(short id)
         {
             return db.DEPARTMENTs.Count(e => e.DEPARTMENT_ID == id) > 0;
+        }
+
+        [Route("Employee/{departID:int}")]
+        public ICollection<EMPLOYEE> GetEmployeesByDepartmentID(int departID)
+        {
+            DEPARTMENT dEPARTMENT = db.DEPARTMENTs.Find(departID);
+            if (dEPARTMENT == null)
+            {
+                return null;
+            }
+            return dEPARTMENT.EMPLOYEEs;
         }
     }
 }

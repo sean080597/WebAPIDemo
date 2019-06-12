@@ -1,4 +1,3 @@
-D:\VisualStudio\Projects\WebAPIDemo\WebAPIDemo\obj\Debug\WebAPIDemo.csproj.CoreCompileInputs.cache
 D:\VisualStudio\Projects\WebAPIDemo\WebAPIDemo\bin\WebAPIDemo.dll.config
 D:\VisualStudio\Projects\WebAPIDemo\WebAPIDemo\bin\WebAPIDemo.dll
 D:\VisualStudio\Projects\WebAPIDemo\WebAPIDemo\bin\WebAPIDemo.pdb
@@ -82,7 +81,7 @@ D:\VisualStudio\Projects\WebAPIDemo\WebAPIDemo\bin\System.Web.WebPages.Deploymen
 D:\VisualStudio\Projects\WebAPIDemo\WebAPIDemo\bin\System.Web.WebPages.Razor.xml
 D:\VisualStudio\Projects\WebAPIDemo\WebAPIDemo\bin\Antlr3.Runtime.pdb
 D:\VisualStudio\Projects\WebAPIDemo\WebAPIDemo\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\VisualStudio\Projects\WebAPIDemo\WebAPIDemo\obj\Debug\WebAPIDemo.csprojAssemblyReference.cache
+D:\VisualStudio\Projects\WebAPIDemo\WebAPIDemo\obj\Debug\WebAPIDemo.csproj.CoreCompileInputs.cache
 D:\VisualStudio\Projects\WebAPIDemo\WebAPIDemo\obj\Debug\WebAPIDemo.csproj.CopyComplete
 D:\VisualStudio\Projects\WebAPIDemo\WebAPIDemo\obj\Debug\WebAPIDemo.dll
 D:\VisualStudio\Projects\WebAPIDemo\WebAPIDemo\obj\Debug\WebAPIDemo.pdb
