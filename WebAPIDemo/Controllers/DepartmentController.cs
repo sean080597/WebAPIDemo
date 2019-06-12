@@ -15,42 +15,42 @@ namespace WebAPIDemo.Controllers
     [RoutePrefix("api/department")]
     public class DepartmentController : ApiController
     {
-        private EmployeeEntities db = new EmployeeEntities();
+        private EmployeeCRUDEntities db = new EmployeeCRUDEntities();
 
         // GET: api/Department
-        public IQueryable<DEPARTMENT> GetDEPARTMENTs()
+        public IQueryable<Department> GetDepartments()
         {
-            return db.DEPARTMENTs;
+            return db.Departments;
         }
 
         // GET: api/Department/5
-        [ResponseType(typeof(DEPARTMENT))]
-        public IHttpActionResult GetDEPARTMENT(short id)
+        [ResponseType(typeof(Department))]
+        public IHttpActionResult GetDepartment(int id)
         {
-            DEPARTMENT dEPARTMENT = db.DEPARTMENTs.Find(id);
-            if (dEPARTMENT == null)
+            Department department = db.Departments.Find(id);
+            if (department == null)
             {
                 return NotFound();
             }
 
-            return Ok(dEPARTMENT);
+            return Ok(department);
         }
 
         // PUT: api/Department/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutDEPARTMENT(short id, DEPARTMENT dEPARTMENT)
+        public IHttpActionResult PutDepartment(int id, Department department)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != dEPARTMENT.DEPARTMENT_ID)
+            if (id != department.DEPARTMENT_ID)
             {
                 return BadRequest();
             }
 
-            db.Entry(dEPARTMENT).State = EntityState.Modified;
+            db.Entry(department).State = EntityState.Modified;
 
             try
             {
@@ -58,7 +58,7 @@ namespace WebAPIDemo.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!DEPARTMENTExists(id))
+                if (!DepartmentExists(id))
                 {
                     return NotFound();
                 }
@@ -72,50 +72,34 @@ namespace WebAPIDemo.Controllers
         }
 
         // POST: api/Department
-        [ResponseType(typeof(DEPARTMENT))]
-        public IHttpActionResult PostDEPARTMENT(DEPARTMENT dEPARTMENT)
+        [ResponseType(typeof(Department))]
+        public IHttpActionResult PostDepartment(Department department)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            dEPARTMENT.DEPARTMENT_ID = (short)(db.DEPARTMENTs.Max(t => t.DEPARTMENT_ID) + 1);
-            db.DEPARTMENTs.Add(dEPARTMENT);
+            db.Departments.Add(department);
+            db.SaveChanges();
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (DEPARTMENTExists(dEPARTMENT.DEPARTMENT_ID))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return CreatedAtRoute("DefaultApi", new { id = dEPARTMENT.DEPARTMENT_ID }, dEPARTMENT);
+            return CreatedAtRoute("DefaultApi", new { id = department.DEPARTMENT_ID }, department);
         }
 
         // DELETE: api/Department/5
-        [ResponseType(typeof(DEPARTMENT))]
-        public IHttpActionResult DeleteDEPARTMENT(short id)
+        [ResponseType(typeof(Department))]
+        public IHttpActionResult DeleteDepartment(int id)
         {
-            DEPARTMENT dEPARTMENT = db.DEPARTMENTs.Find(id);
-            if (dEPARTMENT == null)
+            Department department = db.Departments.Find(id);
+            if (department == null)
             {
                 return NotFound();
             }
 
-            db.DEPARTMENTs.Remove(dEPARTMENT);
+            db.Departments.Remove(department);
             db.SaveChanges();
 
-            return Ok(dEPARTMENT);
+            return Ok(department);
         }
 
         protected override void Dispose(bool disposing)
@@ -127,20 +111,20 @@ namespace WebAPIDemo.Controllers
             base.Dispose(disposing);
         }
 
-        private bool DEPARTMENTExists(short id)
+        private bool DepartmentExists(int id)
         {
-            return db.DEPARTMENTs.Count(e => e.DEPARTMENT_ID == id) > 0;
+            return db.Departments.Count(e => e.DEPARTMENT_ID == id) > 0;
         }
 
         [Route("Employee/{departID:int}")]
-        public ICollection<EMPLOYEE> GetEmployeesByDepartmentID(int departID)
+        public ICollection<Employee> GetEmployeesByDepartmentID(int departID)
         {
-            DEPARTMENT dEPARTMENT = db.DEPARTMENTs.Find(departID);
+            Department dEPARTMENT = db.Departments.Find(departID);
             if (dEPARTMENT == null)
             {
                 return null;
             }
-            return dEPARTMENT.EMPLOYEEs;
+            return dEPARTMENT.Employees;
         }
     }
 }

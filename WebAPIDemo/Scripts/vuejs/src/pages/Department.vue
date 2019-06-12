@@ -40,12 +40,14 @@ export default {
         }
     },
     created() {
+        this.$Progress.start()
         axios.get('/api/department')
         .then(({data}) => (
-            // $.each(data, function (indexInArray, valueOfElement) {
-            //     data[indexInArray]['checked'] = false
-            // }),
-            this.departments = data
+            $.each(data, function (indexInArray, valueOfElement) {
+                data[indexInArray]['checked'] = false
+            }),
+            this.departments = data,
+            this.$Progress.finish()
         ))
         .catch(error => console.log(error.response.data))
     },

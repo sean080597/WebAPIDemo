@@ -39,6 +39,7 @@
     "webpack-dev-server": "^3.7.1"
   },
   "dependencies": {
+    "npm": "^6.9.0",
     "sweetalert2": "^8.12.1",
     "vee-validate": "^2.2.10",
     "vue-progressbar": "^0.7.5",

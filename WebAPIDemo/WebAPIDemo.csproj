@@ -175,10 +175,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\DEPARTMENT.cs">
+    <Compile Include="Models\Department.cs">
       <DependentUpon>EmployeeModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EMPLOYEE.cs">
+    <Compile Include="Models\Employee.cs">
       <DependentUpon>EmployeeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EmployeeModel.Context.cs">
@@ -195,6 +195,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EmployeeModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>EmployeeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

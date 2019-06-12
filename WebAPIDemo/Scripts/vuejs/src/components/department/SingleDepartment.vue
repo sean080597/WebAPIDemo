@@ -2,7 +2,7 @@
     <v-card class="mb-2">
         <v-card-title primary-title>
             <v-layout row wrap>
-                <v-checkbox hide-details class="shrink mr-2"></v-checkbox>
+                <v-checkbox v-model="model.checked" hide-details class="shrink mr-2"></v-checkbox>
                 <v-flex>
                     <router-link :to="'/department/employee/' + model.DEPARTMENT_ID">
                         <h3 class="headline mb-0">

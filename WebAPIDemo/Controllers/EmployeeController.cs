@@ -14,42 +14,42 @@ namespace WebAPIDemo.Controllers
 {
     public class EmployeeController : ApiController
     {
-        private EmployeeEntities db = new EmployeeEntities();
+        private EmployeeCRUDEntities db = new EmployeeCRUDEntities();
 
         // GET: api/Employee
-        public IQueryable<EMPLOYEE> GetEMPLOYEEs()
+        public IQueryable<Employee> GetEmployees()
         {
-            return db.EMPLOYEEs;
+            return db.Employees;
         }
 
         // GET: api/Employee/5
-        [ResponseType(typeof(EMPLOYEE))]
-        public IHttpActionResult GetEMPLOYEE(short id)
+        [ResponseType(typeof(Employee))]
+        public IHttpActionResult GetEmployee(int id)
         {
-            EMPLOYEE eMPLOYEE = db.EMPLOYEEs.Find(id);
-            if (eMPLOYEE == null)
+            Employee employee = db.Employees.Find(id);
+            if (employee == null)
             {
                 return NotFound();
             }
 
-            return Ok(eMPLOYEE);
+            return Ok(employee);
         }
 
         // PUT: api/Employee/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutEMPLOYEE(short id, EMPLOYEE eMPLOYEE)
+        public IHttpActionResult PutEmployee(int id, Employee employee)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != eMPLOYEE.EMPLOYEE_ID)
+            if (id != employee.EMPLOYEE_ID)
             {
                 return BadRequest();
             }
 
-            db.Entry(eMPLOYEE).State = EntityState.Modified;
+            db.Entry(employee).State = EntityState.Modified;
 
             try
             {
@@ -57,7 +57,7 @@ namespace WebAPIDemo.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!EMPLOYEEExists(id))
+                if (!EmployeeExists(id))
                 {
                     return NotFound();
                 }
@@ -71,50 +71,34 @@ namespace WebAPIDemo.Controllers
         }
 
         // POST: api/Employee
-        [ResponseType(typeof(EMPLOYEE))]
-        public IHttpActionResult PostEMPLOYEE(EMPLOYEE eMPLOYEE)
+        [ResponseType(typeof(Employee))]
+        public IHttpActionResult PostEmployee(Employee employee)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            eMPLOYEE.EMPLOYEE_ID = (short)(db.EMPLOYEEs.Max(t => t.EMPLOYEE_ID) + 1);
-            db.EMPLOYEEs.Add(eMPLOYEE);
+            db.Employees.Add(employee);
+            db.SaveChanges();
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (EMPLOYEEExists(eMPLOYEE.EMPLOYEE_ID))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return CreatedAtRoute("DefaultApi", new { id = eMPLOYEE.EMPLOYEE_ID }, eMPLOYEE);
+            return CreatedAtRoute("DefaultApi", new { id = employee.EMPLOYEE_ID }, employee);
         }
 
         // DELETE: api/Employee/5
-        [ResponseType(typeof(EMPLOYEE))]
-        public IHttpActionResult DeleteEMPLOYEE(short id)
+        [ResponseType(typeof(Employee))]
+        public IHttpActionResult DeleteEmployee(int id)
         {
-            EMPLOYEE eMPLOYEE = db.EMPLOYEEs.Find(id);
-            if (eMPLOYEE == null)
+            Employee employee = db.Employees.Find(id);
+            if (employee == null)
             {
                 return NotFound();
             }
 
-            db.EMPLOYEEs.Remove(eMPLOYEE);
+            db.Employees.Remove(employee);
             db.SaveChanges();
 
-            return Ok(eMPLOYEE);
+            return Ok(employee);
         }
 
         protected override void Dispose(bool disposing)
@@ -126,9 +110,9 @@ namespace WebAPIDemo.Controllers
             base.Dispose(disposing);
         }
 
-        private bool EMPLOYEEExists(short id)
+        private bool EmployeeExists(int id)
         {
-            return db.EMPLOYEEs.Count(e => e.EMPLOYEE_ID == id) > 0;
+            return db.Employees.Count(e => e.EMPLOYEE_ID == id) > 0;
         }
     }
 }
