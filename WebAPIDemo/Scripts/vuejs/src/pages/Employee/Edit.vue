@@ -4,7 +4,7 @@
       <TitleLink title="Employee/Create"></TitleLink>
       <!-- List employees -->
       <v-flex xs8 sm10 md6>
-        <v-form @submit.prevent="createEmployee">
+        <v-form @submit.prevent="editEmployee">
           <v-text-field
             label="Employee Name"
             type="text"
@@ -36,7 +36,7 @@
             required
           ></v-autocomplete>
 
-          <v-btn color="primary" type="submit">Create</v-btn>
+          <v-btn color="primary" type="submit">Edit</v-btn>
         </v-form>
       </v-flex>
     </v-layout>
@@ -53,11 +53,8 @@ export default {
   },
   data() {
     return {
-      form: {
-        EMPLOYEE_NAME: null,
-        EMPLOYEE_SALARY: null,
-        EMPLOYEE_DEPARTMENT: null
-      },
+      empID: this.$route.params.employee_id,
+      form: {},
       departments: [],
       dictionary: {
         custom: {
@@ -78,18 +75,29 @@ export default {
         .get("/api/department")
         .then(({ data }) => (this.departments = data));
     },
-    createEmployee() {
+    loadEmployee() {
+      axios
+        .get("/api/employee/EmployeeOnly/" + this.empID)
+        .then(({ data }) => {
+          this.form = data[0]
+        })
+        .catch(() => {
+          Swal("Failed!", "Some error occurred", "warning");
+          this.$Progress.fail();
+        });
+    },
+    editEmployee() {
       this.$Progress.start();
       this.$validator.validateAll().then(result => {
         if (result) {
           axios
-            .post("/api/employee", this.form)
+            .put("/api/employee/" + this.empID, this.form)
             .then(res => {
               this.$router.push("/employee");
 
               toast.fire({
                 type: "success",
-                title: "Created Employee successfully"
+                title: "Edited Employee successfully"
               });
 
               this.$Progress.finish();
@@ -105,10 +113,11 @@ export default {
     }
   },
   created() {
-    this.getDepartments();
+    this.getDepartments()
+    this.loadEmployee()
   },
   mounted() {
-    this.$validator.localize("en", this.dictionary);
+    this.$validator.localize("en", this.dictionary)
   }
 };
 </script>

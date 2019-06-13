@@ -12,6 +12,7 @@ using WebAPIDemo.Models;
 
 namespace WebAPIDemo.Controllers
 {
+    [RoutePrefix("api/employee")]
     public class EmployeeController : ApiController
     {
         private EmployeeEntities db = new EmployeeEntities();
@@ -129,6 +130,18 @@ namespace WebAPIDemo.Controllers
         private bool EMPLOYEEExists(short id)
         {
             return db.EMPLOYEEs.Count(e => e.EMPLOYEE_ID == id) > 0;
+        }
+
+        [Route("EmployeeOnly/{empID:int}")]
+        public IHttpActionResult GetEmployeeOnly(int empID)
+        {
+            return Ok(db.EMPLOYEEs.Select(t => new EmployeeOnly
+            {
+                EMPLOYEE_ID = t.EMPLOYEE_ID,
+                EMPLOYEE_NAME = t.EMPLOYEE_NAME,
+                EMPLOYEE_SALARY = t.EMPLOYEE_SALARY,
+                EMPLOYEE_DEPARTMENT = t.EMPLOYEE_DEPARTMENT
+            }).Where(t => t.EMPLOYEE_ID == empID));
         }
     }
 }

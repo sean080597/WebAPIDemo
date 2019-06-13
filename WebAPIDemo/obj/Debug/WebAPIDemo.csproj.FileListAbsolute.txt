@@ -173,3 +173,4 @@ D:\VisualStudio\Projects\WebAPIDemo\WebAPIDemo\obj\Debug\WebAPIDemo.csproj.CoreC
 D:\VisualStudio\Projects\WebAPIDemo\WebAPIDemo\obj\Debug\WebAPIDemo.csproj.CopyComplete
 D:\VisualStudio\Projects\WebAPIDemo\WebAPIDemo\obj\Debug\WebAPIDemo.dll
 D:\VisualStudio\Projects\WebAPIDemo\WebAPIDemo\obj\Debug\WebAPIDemo.pdb
+D:\VisualStudio\Projects\WebAPIDemo\WebAPIDemo\obj\Debug\WebAPIDemo.csprojAssemblyReference.cache

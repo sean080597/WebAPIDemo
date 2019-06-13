@@ -9,11 +9,16 @@
 
       <!-- List Departments -->
       <v-flex xs10 sm8 md6>
-        <SingleDepartment
-          v-for="(depart, index) in departments"
-          :key="depart.DEPARTMENT_ID"
-          v-model="departments[index]"
-        ></SingleDepartment>
+        <v-flex v-if="departments.length > 0">
+          <SingleDepartment
+            v-for="(depart, index) in departments"
+            :key="depart.DEPARTMENT_ID"
+            v-model="departments[index]"
+          ></SingleDepartment>
+        </v-flex>
+        <v-flex v-else>
+          <h1 class="grey--text">No Department</h1>
+        </v-flex>
       </v-flex>
 
       <!-- SideBar show in large screen -->
@@ -74,7 +79,7 @@ export default {
         if (result.value) {
           this.selectedDepartments.forEach(element => {
             axios
-              .delete("/api/department/" + element.DEPARTMENT_ID )
+              .delete("/api/department/" + element.DEPARTMENT_ID)
               .then(() => {
                 //set event to reload faculties
                 Fire.$emit("ReloadDepartments");

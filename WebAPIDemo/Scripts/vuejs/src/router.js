@@ -10,9 +10,10 @@ const routes = [
     { path: '/department', component: require('./pages/Department.vue').default },
     { path: '/employee', component: require('./pages/Employee.vue').default },
     { path: '/department/employee/:department_id', component: require('./pages/Employee.vue').default },
-    { path: '/employee/create', component: require('./pages/Employee/Create.vue').default },
     { path: '/department/create', component: require('./pages/Department/Create.vue').default },
     { path: '/department/edit/:department_id', component: require('./pages/Department/Edit.vue').default },
+    { path: '/employee/create', component: require('./pages/Employee/Create.vue').default },
+    { path: '/employee/edit/:employee_id', component: require('./pages/Employee/Edit.vue').default },
 ];
 
 const router = new VueRouter({
