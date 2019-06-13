@@ -1,6 +1,8 @@
 require('./bootstrap')
 window.Vue = require('vue')
 
+window.Fire = new Vue()
+
 import Vue from 'vue'
 import router from './router';
 import VueProgressBar from 'vue-progressbar';

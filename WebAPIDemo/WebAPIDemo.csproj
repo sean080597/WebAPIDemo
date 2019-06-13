@@ -175,10 +175,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Department.cs">
+    <Compile Include="Models\DEPARTMENT.cs">
       <DependentUpon>EmployeeModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Employee.cs">
+    <Compile Include="Models\EMPLOYEE.cs">
       <DependentUpon>EmployeeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EmployeeModel.Context.cs">
@@ -195,9 +195,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EmployeeModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>EmployeeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -260,6 +257,18 @@
     <Content Include="Scripts\vuejs\dist\bundle.js" />
     <Content Include="Scripts\vuejs\src\app.js" />
     <Content Include="Scripts\vuejs\src\bootstrap.js" />
+    <Content Include="Scripts\vuejs\src\components\AppFooter.vue" />
+    <Content Include="Scripts\vuejs\src\components\department\SingleDepartment.vue" />
+    <Content Include="Scripts\vuejs\src\components\employee\SingleEmployee.vue" />
+    <Content Include="Scripts\vuejs\src\components\Sidebar.vue" />
+    <Content Include="Scripts\vuejs\src\components\SidebarTOP.vue" />
+    <Content Include="Scripts\vuejs\src\components\TitleLink.vue" />
+    <Content Include="Scripts\vuejs\src\components\Toolbar.vue" />
+    <Content Include="Scripts\vuejs\src\layouts\AppHome.vue" />
+    <Content Include="Scripts\vuejs\src\pages\About.vue" />
+    <Content Include="Scripts\vuejs\src\pages\Dashboard.vue" />
+    <Content Include="Scripts\vuejs\src\pages\Department.vue" />
+    <Content Include="Scripts\vuejs\src\pages\Employee.vue" />
     <Content Include="Scripts\vuejs\src\router.js" />
     <Content Include="Scripts\vuejs\webpack.config.js" />
     <Content Include="Web.config">
@@ -280,14 +289,8 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\vuejs\package.json" />
     <Content Include="Scripts\vuejs\package-lock.json" />
-    <Content Include="Scripts\vuejs\src\components\AppFooter.vue" />
-    <Content Include="Scripts\vuejs\src\components\department\SingleDepartment.vue" />
-    <Content Include="Scripts\vuejs\src\components\Toolbar.vue" />
-    <Content Include="Scripts\vuejs\src\layouts\AppHome.vue" />
-    <Content Include="Scripts\vuejs\src\pages\About.vue" />
-    <Content Include="Scripts\vuejs\src\pages\Dashboard.vue" />
-    <Content Include="Scripts\vuejs\src\pages\Department.vue" />
-    <Content Include="Scripts\vuejs\src\pages\Employee.vue" />
+    <Content Include="Scripts\vuejs\src\pages\Department\CreateOrEdit.vue" />
+    <Content Include="Scripts\vuejs\src\pages\Employee\CreateOrEdit.vue" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

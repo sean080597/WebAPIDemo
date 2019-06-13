@@ -1,52 +1,42 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="EmployeeCRUDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityType Name="Department">
+<Schema Namespace="EmployeeModel.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="DEPARTMENT">
     <Key>
       <PropertyRef Name="DEPARTMENT_ID" />
     </Key>
-    <Property Name="DEPARTMENT_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="DEPARTMENT_NAME" Type="varchar" MaxLength="50" />
-    <Property Name="DEPARTMENT_HEAD" Type="varchar" MaxLength="50" />
+    <Property Name="DEPARTMENT_ID" Type="number" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="DEPARTMENT_NAME" Type="varchar2" MaxLength="50" />
+    <Property Name="DEPARTMENT_HEAD" Type="varchar2" MaxLength="50" />
   </EntityType>
-  <EntityType Name="Employee">
+  <EntityType Name="EMPLOYEE">
     <Key>
       <PropertyRef Name="EMPLOYEE_ID" />
     </Key>
-    <Property Name="EMPLOYEE_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="EMPLOYEE_AGE" Type="int" />
-    <Property Name="EMPLOYEE_NAME" Type="varchar" MaxLength="50" />
-    <Property Name="EMPLOYEE_SALARY" Type="int" />
-    <Property Name="DEPARTMENT_ID" Type="int" />
+    <Property Name="EMPLOYEE_ID" Type="number" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="EMPLOYEE_NAME" Type="varchar2" MaxLength="100" />
+    <Property Name="EMPLOYEE_DEPARTMENT" Type="number" Precision="5" Scale="0" />
+    <Property Name="EMPLOYEE_SALARY" Type="number" Precision="6" Scale="0" />
   </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="principal_id" Type="int" Nullable="false" />
-    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="version" Type="int" />
-    <Property Name="definition" Type="varbinary(max)" />
-  </EntityType>
-  <Association Name="FK__Employee__DEPART__2B3F6F97">
-    <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
-    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+  <Association Name="CONS_EMPLOYEE_DEPARTMENT_FK">
+    <End Role="DEPARTMENT" Type="Self.DEPARTMENT" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Department">
+      <Principal Role="DEPARTMENT">
         <PropertyRef Name="DEPARTMENT_ID" />
       </Principal>
-      <Dependent Role="Employee">
-        <PropertyRef Name="DEPARTMENT_ID" />
+      <Dependent Role="EMPLOYEE">
+        <PropertyRef Name="EMPLOYEE_DEPARTMENT" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="EmployeeCRUDModelStoreContainer">
-    <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__Employee__DEPART__2B3F6F97" Association="Self.FK__Employee__DEPART__2B3F6F97">
-      <End Role="Department" EntitySet="Department" />
-      <End Role="Employee" EntitySet="Employee" />
+  <EntityContainer Name="EmployeeModelStoreContainer">
+    <EntitySet Name="DEPARTMENT" EntityType="Self.DEPARTMENT" Schema="INTERSHIP" store:Type="Tables" />
+    <EntitySet Name="EMPLOYEE" EntityType="Self.EMPLOYEE" Schema="INTERSHIP" store:Type="Tables" />
+    <AssociationSet Name="CONS_EMPLOYEE_DEPARTMENT_FK" Association="Self.CONS_EMPLOYEE_DEPARTMENT_FK">
+      <End Role="DEPARTMENT" EntitySet="DEPARTMENT" />
+      <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
     </AssociationSet>
   </EntityContainer>
 </Schema>
