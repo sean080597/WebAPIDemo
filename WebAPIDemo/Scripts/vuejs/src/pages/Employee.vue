@@ -1,14 +1,14 @@
 <template>
     <v-container grid-list-md>
-        <v-layout row wrap>
+        <v-layout row wrap justify-center="">
             <TitleLink title="Employee's list"></TitleLink>
             <!-- SidebarTop show in small screen-->
-            <v-flex xs12 hidden-md-and-up>
+            <v-flex xs12 sm10 hidden-md-and-up>
                 <SidebarTOP></SidebarTOP>
             </v-flex>
 
             <!-- List employees -->
-            <v-flex>
+            <v-flex xs10 sm8 md6>
                 <v-flex v-if="employees.length > 0">
                     <SingleEmployee
                     v-for="emp in employees"

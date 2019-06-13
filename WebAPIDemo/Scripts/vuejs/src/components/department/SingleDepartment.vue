@@ -1,6 +1,6 @@
 <template>
   <v-card class="mb-2">
-    <v-card-title primary-title>
+    <v-card-title primary-title style="padding:10px 16px">
       <v-layout row wrap>
         <v-checkbox v-model="model.checked" hide-details class="shrink mr-2"></v-checkbox>
         <v-flex>
@@ -9,6 +9,10 @@
           </router-link>
           <div class="grey--text">{{model.DEPARTMENT_HEAD}}</div>
         </v-flex>
+        <v-spacer></v-spacer>
+        <v-btn color="primary" fab small dark :to="'/department/edit/' + model.DEPARTMENT_ID">
+          <v-icon>edit</v-icon>
+        </v-btn>
       </v-layout>
     </v-card-title>
   </v-card>

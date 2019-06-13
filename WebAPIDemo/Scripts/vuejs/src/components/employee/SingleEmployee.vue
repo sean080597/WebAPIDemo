@@ -1,6 +1,6 @@
 <template>
     <v-card class="mb-2">
-        <v-card-title primary-title>
+        <v-card-title primary-title style="padding:10px 16px">
             <div>
                 <h3 class="headline mb-0">
                     {{data.EMPLOYEE_NAME}}
