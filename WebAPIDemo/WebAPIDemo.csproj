@@ -290,8 +290,10 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\vuejs\package.json" />
     <Content Include="Scripts\vuejs\package-lock.json" />
-    <Content Include="Scripts\vuejs\src\pages\Department\CreateOrEdit.vue" />
-    <Content Include="Scripts\vuejs\src\pages\Employee\CreateOrEdit.vue" />
+    <Content Include="Scripts\vuejs\src\pages\Department\Create.vue" />
+    <Content Include="Scripts\vuejs\src\pages\Department\Edit.vue" />
+    <Content Include="Scripts\vuejs\src\pages\Employee\Create.vue" />
+    <Content Include="Scripts\vuejs\src\pages\Employee\Edit.vue" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

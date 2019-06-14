@@ -8,7 +8,7 @@
       </v-flex>
 
       <!-- List employees -->
-      <v-flex xs10 sm8 md6>
+      <v-flex xs11 sm8 md6>
         <v-flex v-if="employees.length > 0">
           <SingleEmployee
             v-for="(emp, index) in employees"
@@ -23,7 +23,7 @@
 
       <!-- SideBar show in large screen -->
       <v-flex md4 hidden-sm-and-down>
-        <Sidebar cate="Employee"></Sidebar>
+        <Sidebar cate="Employee" v-model="calcChecked" @delSelected="destroySubmit"></Sidebar>
       </v-flex>
     </v-layout>
   </v-container>
@@ -50,7 +50,13 @@ export default {
         axios
           .get("/api/employee")
           .then(
-            ({ data }) => ((this.employees = data), this.$Progress.finish())
+            ({ data }) => (
+              $.each(data, function(indexInArray, valueOfElement) {
+                data[indexInArray]["checked"] = false;
+              }),
+              (this.employees = data),
+              this.$Progress.finish()
+            )
           )
           .catch(error => console.log(error.response.data));
       } else {
@@ -59,10 +65,57 @@ export default {
           .then(({ data }) => (this.employees = data))
           .catch(error => console.log(error.response.data));
       }
+    },
+    destroySubmit() {
+      Swal.fire({
+        title: "Do you wanna delete these records?",
+        text: "Cannot restore these records!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Delete!"
+      }).then(result => {
+        if (result.value) {
+          this.selectedEmployees.forEach(element => {
+            axios
+              .delete("/api/employee/" + element.EMPLOYEE_ID)
+              .then(() => {
+                //set event to reload faculties
+                Fire.$emit("ReloadEmployees");
+                if (result.value) {
+                  Swal.fire(
+                    "Deleted!",
+                    "Deleted records successfully.",
+                    "success"
+                  );
+                  this.$Progress.finish();
+                }
+              })
+              .catch(() => {
+                Swal.fire("Failed!", "Đã có lỗi xảy ra!", "warning");
+                this.$Progress.fail();
+              });
+          });
+        }
+      });
+    }
+  },
+  computed: {
+    calcChecked() {
+      return this.employees.some(emp => {
+        return emp.checked === true;
+      });
+    },
+    selectedEmployees() {
+      return this.employees.filter(item => item.checked);
     }
   },
   created() {
     this.loadEmployees();
+    Fire.$on("ReloadEmployees", () => {
+      this.loadEmployees();
+    });
   }
 };
 </script>

@@ -2,9 +2,12 @@
   <v-card class="mb-2">
     <v-card-title primary-title style="padding:10px 16px">
       <v-layout row wrap>
-        <v-checkbox hide-details class="shrink mr-2"></v-checkbox>
+        <v-checkbox v-model="model.checked" hide-details class="shrink mr-2"></v-checkbox>
         <v-flex>
-          <h3 class="headline mb-0">{{model.EMPLOYEE_NAME}}</h3>
+          <v-layout row wrap align-center>
+            <h3 class="headline mb-0">{{model.EMPLOYEE_NAME}}</h3>
+            <h5 class="title blue-grey--text">&nbsp;- {{model.DEPARTMENT.DEPARTMENT_NAME}}</h5>
+          </v-layout>
           <div class="grey--text">{{model.EMPLOYEE_SALARY}}</div>
         </v-flex>
       </v-layout>

@@ -42,13 +42,6 @@ export default {
       departments: []
     };
   },
-  created() {
-    this.loadDepartments();
-
-    Fire.$on("ReloadDepartments", () => {
-      this.loadDepartments();
-    });
-  },
   methods: {
     loadDepartments() {
       this.$Progress.start();
@@ -59,14 +52,13 @@ export default {
             $.each(data, function(indexInArray, valueOfElement) {
               data[indexInArray]["checked"] = false;
             }),
-            (this.departments = data),
+            this.departments = data,
             this.$Progress.finish()
           )
         )
         .catch(error => console.log(error.response.data));
     },
     destroySubmit() {
-      // console.log(this.selectedDepartments)
       Swal.fire({
         title: "Do you wanna delete these records?",
         text: "Cannot restore these records!",
@@ -110,7 +102,14 @@ export default {
     selectedDepartments() {
       return this.departments.filter(item => item.checked);
     }
-  }
+  },
+  created() {
+    this.loadDepartments();
+
+    Fire.$on("ReloadDepartments", () => {
+      this.loadDepartments();
+    });
+  },
 };
 </script>
 
